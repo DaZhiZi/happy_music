@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<title>music</title>
+		<link rel="stylesheet" href="css/music.css">
+	</head>
+	<body>
+		<div class="background">
+			<img id='photo' class='img' src="img/爱的飞行日记.jpg" >
+			<img id='sPhoto' class='two-img' src="img/爱的飞行日记.jpg">
+		</div>
+		<div class="music">
+			<audio id='id-audio-player' data-now="1">
+				<source src="mp3/周杰伦 - .爱的飞行日记.mp3">
+			</audio>
+			<div class="controls">
+				<input type="range" class='range' value="0">
+				<span id='nowTime'>00:00</span>
+				<span id='time'></span>
+				<div class="">
+					<span class="heart">
+						❤
+					</span>
+					<span class='list'>☲</span>
+				</div>
+				<div class="h3">
+					<div id="name-id-1"  class="name active" data-id=1> 爱的飞行日记 </div>
+					<div id="name-id-2" class='name' data-id=2>  简单爱  </div>
+					<div id="name-id-3" class='name' data-id=3> 龙卷风 (Live)  </div>
+					<div id="name-id-4" class='name' data-id=4>  听妈妈的话  </div>
+					<div id="name-id-5"  class='name' data-id=5>  我要夏天  </div>
+				</div>
+
+				<div class="h4">
+					<div id="songer-id-1" class="name action" data-id=1>周杰伦</div>
+					<div id="songer-id-2" class='name' data-id=2>周杰伦</div>
+					<div id="songer-id-3" class='name' data-id=3> 周杰伦  </div>
+					<div id="songer-id-4" class='name' data-id=4>  周杰伦  </div>
+					<div id="songer-id-5" class='name' data-id=5> 周杰伦  </div>
+				</div>
+
+					<div id="prevSong"  style="margin: 20px  0px 88px 85px;">
+						<div id='shangSong'>
+							◁
+						</div>
+					</div>
+
+					<div id="action" class="now circle actives" style="margin: 20px 0px 88px 20px;">
+						<div class="circle_inner_play">
+						</div>
+					</div>
+
+					<div id="stop" class="now circle" style="margin: 20px  0px 88px 20px;">
+						<div class="circle_inner_pause">
+							▐▐
+						</div>
+					</div>
+
+					<div id="lastSong"  style="margin: 20px  0px 88px 85px;">
+						<div id='nextSong'>
+							▷
+						</div>
+					</div>
+
+			</div>
+            <div class="gray">
+            </div>
+            <div class="songList move">
+                <span class="list-title">播放列表</span>
+                <span class="xian"></span>
+                <div class='song-title '>
+                    <span id="song-id-1" class='songtitle' data-id=1>周杰伦 - .爱的飞行日记</span>
+                    <span class="xian"></span>
+
+					<span id="song-id-2" class='songtitle' data-id=2>周杰伦 - .简单爱</span>
+					<span class="xian"></span>
+
+					<span id="song-id-3" class='songtitle'  data-id=3>周杰伦 - .龙卷风 (Live)</span>
+					<span class="xian"></span>
+
+					<span id="song-id-4" class='songtitle' data-id=4>周杰伦 - .听妈妈的话</span>
+					<span class="xian"></span>
+
+					<span id="song-id-5" class='songtitle' data-id=5>周杰伦 - .我要夏天</span>
+					<span class="xian"></span>
+
+                </div>
+            </div>
+		</div>
+ 		<script src="js/music.js"></script>
+	</body>
+</html>
