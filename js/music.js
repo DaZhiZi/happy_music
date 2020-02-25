@@ -1,28 +1,28 @@
-const log = function() {
+const log = function () {
     console.log.apply(console, arguments)
 }
 
-const e = function(selector) {
+const e = function (selector) {
     return document.querySelector(selector)
 }
 
-const appendHtml = function(element, html) {
+const appendHtml = function (element, html) {
     element.insertAdjacentHTML('beforeend', html)
 }
 
-const bindEvent = function(element, eventName, callback) {
+const bindEvent = function (element, eventName, callback) {
     element.addEventListener(eventName, callback)
 }
 
-const bindAll = function(selector, eventName, callback) {
+const bindAll = function (selector, eventName, callback) {
     let elements = document.querySelectorAll(selector)
-    for(let i = 0; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
         let e = elements[i]
         bindEvent(e, eventName, callback)
     }
 }
 
-const removeClassAll = function(className) {
+const removeClassAll = function (className) {
     let selector = '.' + className
     let elements = document.querySelectorAll(selector)
     for (let i = 0; i < elements.length; i++) {
@@ -72,8 +72,8 @@ const find_song = function (index) {
     return null
 }
 
-const actives = function(){
-    if(e('#action').classList.contains('actives')) {
+const actives = function () {
+    if (e('#action').classList.contains('actives')) {
         let className = 'actives'
         removeClassAll(className)
         let c = e('#stop')
@@ -87,8 +87,8 @@ const actives = function(){
 }
 
 //换按钮
-const change = function(){
-    if(e('#action').classList.contains('actives')) {
+const change = function () {
+    if (e('#action').classList.contains('actives')) {
         let className = 'actives'
         removeClassAll(className)
         let c = e('#stop')
@@ -97,7 +97,7 @@ const change = function(){
 }
 
 //换背景名字
-const img = function(newIndex){
+const img = function (newIndex) {
     let i = newIndex
     let song = find_song(i)
     let name = song.name
@@ -107,14 +107,14 @@ const img = function(newIndex){
     img.src = `img/${name}.jpg`
     twoimg.src = `img/${name}.jpg`
 
-    let h3 = '#name-id-'+ String(i)
+    let h3 = '#name-id-' + String(i)
     let className = 'active'
     removeClassAll(className)
 
     let c = e(h3)
     c.classList.add(className)
 
-    let h4 = '#songer-id-'+ String(newIndex)
+    let h4 = '#songer-id-' + String(newIndex)
     let class_name = 'action'
     removeClassAll(class_name)
 
@@ -123,19 +123,19 @@ const img = function(newIndex){
 }
 
 //列表颜色
-const color = function() {
+const color = function () {
     let audio = e('audio')
     let id = parseInt(audio.dataset.now)
-    let newId = '#song-id-'+ String(id)
+    let newId = '#song-id-' + String(id)
     let className = 'yanSe'
     removeClassAll(className)
     let c = e(newId)
     c.classList.add(className)
 }
 //开始
-const bindAction = function() {
+const bindAction = function () {
     let element = e('#action')
-    bindEvent(element, 'click', function(){
+    bindEvent(element, 'click', function () {
         let a = e('#id-audio-player')
         a.play()
         actives()
@@ -143,9 +143,9 @@ const bindAction = function() {
     })
 }
 //暂停
-const bindStop = function() {
+const bindStop = function () {
     let element = e('#stop')
-    bindEvent(element, 'click', function(){
+    bindEvent(element, 'click', function () {
         let a = e('#id-audio-player')
         a.pause()
         actives()
@@ -153,14 +153,14 @@ const bindStop = function() {
     })
 }
 //分秒
-const rjust = function(str, size, delimeter='0') {
+const rjust = function (str, size, delimeter = '0') {
     let result = str
-    while(result.length < size) {
+    while (result.length < size) {
         result = delimeter + result
     }
     return result
 }
-const formatTime = function(sum) {
+const formatTime = function (sum) {
     let m = String(Math.floor(sum % 3600 / 60))
     let s = String(Math.floor(sum % 60))
     let time = `${rjust(m, 2)}:${rjust(s, 2)}`
@@ -168,9 +168,9 @@ const formatTime = function(sum) {
 }
 
 //总时间
-const bindTime = function() {
+const bindTime = function () {
     let a = e('#id-audio-player')
-    bindEvent(a,'canplay',function(){
+    bindEvent(a, 'canplay', function () {
         let sum = parseInt(a.duration)
         let value = formatTime(sum)
         let time = e('#time')
@@ -178,7 +178,7 @@ const bindTime = function() {
     })
 }
 
-const showTime =  function(event){
+const showTime = function (event) {
     let audio = e('#id-audio-player')
     let target = event.target
     let sum = audio.currentTime
@@ -195,12 +195,12 @@ const showTime =  function(event){
 }
 
 //当前时间
-const nowtime = function() {
+const nowtime = function () {
     let audio = e('#id-audio-player')
     audio.addEventListener('timeupdate', showTime)
 }
 
-const showHeart = function(now) {
+const showHeart = function (now) {
     let i = now
     let music = find_song(i)
     let className = 'pink-heart'
@@ -212,12 +212,12 @@ const showHeart = function(now) {
     }
 }
 //通用
-const goIndex = function(newIndex) {
+const goIndex = function (newIndex) {
     let i = newIndex
     let audio = e('audio')
     let music = find_song(i)
     audio.src = music.src
-    bindEvent(audio, 'canplay', function(){
+    bindEvent(audio, 'canplay', function () {
         audio.play()
         img(i)
         change()
@@ -226,11 +226,10 @@ const goIndex = function(newIndex) {
     })
     audio.dataset.now = i
 }
-
 //上一首
-const bindPrev = function() {
+const bindPrev = function () {
     let selector = e('#shangSong')
-    bindEvent(selector, 'click', function(){
+    bindEvent(selector, 'click', function () {
         let audio = e('audio')
         let index = parseInt(audio.dataset.now)
         let len = config_music.length
@@ -241,12 +240,10 @@ const bindPrev = function() {
         goIndex(newIndex)
     })
 }
-
-
 //下一首
-const bindNext = function() {
+const bindNext = function () {
     let selector = e('#nextSong')
-    bindEvent(selector, 'click', function(){
+    bindEvent(selector, 'click', function () {
         let audio = e('audio')
         let index = parseInt(audio.dataset.now)
         let len = config_music.length
@@ -257,11 +254,9 @@ const bindNext = function() {
         goIndex(newIndex)
     })
 }
-
-
 // 给 input range 添加拖动事件
-const bindRange = function() {
-    e('.range').addEventListener('input', function(event){
+const bindRange = function () {
+    e('.range').addEventListener('input', function (event) {
         e('#id-audio-player').removeEventListener('timeupdate', showTime)
         let v = this.value
         // console.log('v', v)
@@ -270,10 +265,10 @@ const bindRange = function() {
     })
 }
 //心
-const bindHeart = function() {
+const bindHeart = function () {
     let b = e('.heart')
     let audio = e('audio')
-    bindEvent(b, 'click', function(){
+    bindEvent(b, 'click', function () {
         let now = audio.dataset.now
         let music = find_song(now)
         let className = 'pink-heart'
@@ -287,16 +282,16 @@ const bindHeart = function() {
     })
 }
 //列表
-const bindList = function(){
+const bindList = function () {
     let list = e('.list')
     let a = e('.gray')
-    bindEvent(list, 'click', function(){
+    bindEvent(list, 'click', function () {
         let className = 'move'
         removeClassAll(className)
         let classN = 'move-1'
         a.classList.add(classN)
     })
-    bindEvent(a, 'click', function(){
+    bindEvent(a, 'click', function () {
         let className = 'move'
         let songList = e('.songList')
         songList.classList.add(className)
@@ -304,21 +299,19 @@ const bindList = function(){
         removeClassAll(classN)
     })
 }
-
 //列表点歌
-const bindClick = function() {
+const bindClick = function () {
     let selector = '.songtitle'
-    bindAll(selector, 'click', function(event){
+    bindAll(selector, 'click', function (event) {
         let target = event.target
         let newIndex = parseInt(target.dataset.id)
         goIndex(newIndex)
     })
 }
-
 //循环
-const bindCycle = function() {
+const bindCycle = function () {
     let selector = e('audio')
-    bindEvent(selector, 'ended', function(){
+    bindEvent(selector, 'ended', function () {
         let audio = e('audio')
         let index = parseInt(audio.dataset.now)
         let len = config_music.length
@@ -329,7 +322,7 @@ const bindCycle = function() {
         goIndex(newIndex)
     })
 }
-const bindAlls = function() {
+const bindAlls = function () {
     bindAction()
     bindStop()
     bindTime()
@@ -343,7 +336,7 @@ const bindAlls = function() {
     nowtime()
 }
 
-const __main = function(){
+const __main = function () {
     bindAlls()
 }
 __main()
