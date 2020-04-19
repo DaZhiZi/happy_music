@@ -49,18 +49,18 @@ const config_music = [
         name: '龙卷风 (Live)',
         liked: false,
     },
-    {
-        id: 4,
-        src: 'mp3/周杰伦 - .听妈妈的话.mp3',
-        name: '听妈妈的话',
-        liked: false,
-    },
-    {
-        id: 5,
-        src: 'mp3/周杰伦 - .我要夏天.mp3',
-        name: '我要夏天',
-        liked: false,
-    },
+    // {
+    //     id: 4,
+    //     src: 'mp3/周杰伦 - .听妈妈的话.mp3',
+    //     name: '听妈妈的话',
+    //     liked: false,
+    // },
+    // {
+    //     id: 5,
+    //     src: 'mp3/周杰伦 - .我要夏天.mp3',
+    //     name: '我要夏天',
+    //     liked: false,
+    // },
 
 ]
 const find_song = function (index) {
@@ -137,6 +137,7 @@ const bindAction = function () {
     let element = e('#action')
     bindEvent(element, 'click', function () {
         let a = e('#id-audio-player')
+        window.playing = true
         a.play()
         actives()
         color()
@@ -147,6 +148,7 @@ const bindStop = function () {
     let element = e('#stop')
     bindEvent(element, 'click', function () {
         let a = e('#id-audio-player')
+        window.playing = false
         a.pause()
         actives()
         color()
@@ -218,11 +220,14 @@ const goIndex = function (newIndex) {
     let music = find_song(i)
     audio.src = music.src
     bindEvent(audio, 'canplay', function () {
-        audio.play()
         img(i)
         change()
         showHeart(i)
         color()
+        let status = window.playing
+        if (status) {
+            audio.play()  
+        }
     })
     audio.dataset.now = i
 }
@@ -322,17 +327,37 @@ const bindCycle = function () {
         goIndex(newIndex)
     })
 }
+
+window.playing = false
+// bugs
+// 点击 next and prev  unknown
+// 歌曲播发了  playing 
+
+// 滑动滚动条 unknown
+// 歌曲播发了 playing  
+
+// click action  palying true
+// click stop  palying false
+
 const bindAlls = function () {
     bindAction()
     bindStop()
+
     bindTime()
+
     bindPrev()
     bindNext()
+
     bindRange()
+
     bindHeart()
+
     bindList()
+
     bindClick()
+
     bindCycle()
+    
     nowtime()
 }
 
